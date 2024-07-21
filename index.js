@@ -1,10 +1,9 @@
 const express = require("express");
+const todoRoutes = require("./routes/todoRoutes");
 const app = express();
 const PORT = 4000;
 
-app.get("/home", (req, res) => {
-  res.status(200).json("Welcome, your app is working well");
-});
+app.get("/", todoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
