@@ -1,14 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const { Project } = require("../models/project");
+
+const project = [];
 
 // GET /home
 router.get("/", (req, res) => {
-  res.status(200).json({ message: "Welcome to the home page" });
+  res.status(200).json({ message: "This is the project", data: project });
 });
 
 // GET /about
-router.get("/about", (req, res) => {
-  res.status(200).json({ message: "This is the about page" });
+router.post("/", (req, res) => {
+  const { title, description } = req.body;
+  const newProject = new Project(Math.random().toString(), title, description);
+
+  project.push(newProject);
+  res
+    .status(201)
+    .json({ message: "Project added successfully", data: newProject });
 });
 
 // GET /contact
